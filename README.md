@@ -66,7 +66,13 @@ Voir [`iconpicker_llm`](https://github.com/mr-context/iconpicker_llm) pour le pi
 
 ## Soutenir le projet
 
-Si Ruji te sert au quotidien, tu peux soutenir son développement via [GitHub Sponsors](https://github.com/sponsors/mr-context). Aucune obligation — le projet reste gratuit et open source.
+Si Ruji te sert au quotidien, tu peux soutenir son développement via [Buy Me a Coffee](https://www.buymeacoffee.com/mrcontext) ou [GitHub Sponsors](https://github.com/sponsors/mr-context). Aucune obligation — le projet reste gratuit et open source.
+
+<p align="left">
+  <a href="https://www.buymeacoffee.com/mrcontext">
+    <img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-mrcontext-orange?logo=buy-me-a-coffee&logoColor=white" alt="Buy Me a Coffee" />
+  </a>
+</p>
 
 ## Licence
 
