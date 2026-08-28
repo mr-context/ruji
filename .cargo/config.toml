@@ -1,0 +1,19 @@
+# cargo-xwin définit lui-même CXXFLAGS_x86_64_pc_windows_msvc / CFLAGS_x86_64_pc_windows_msvc
+# quand il lance `cargo build`, ce qui écrase une simple variable d'environnement exportée
+# avant l'appel. `force = true` ici gagne dans tous les cas : nécessaire pour que le CRT
+# (/MD) des dépendances C/C++ (esaxx-rs, onig_sys) corresponde à celui du binaire ONNX
+# Runtime prébuilt (/MD lui aussi), sans quoi le linker refuse (`/failifmismatch`).
+[env]
+# force = true remplace ENTIÈREMENT la valeur de cargo-xwin, chemins d'include compris —
+# on les réinclut donc ici (mêmes chemins que ceux que cargo-xwin pose lui-même), avec
+# /MD à la toute fin pour gagner sur le -MT que la crate `cc` insère en premier.
+CFLAGS_x86_64_pc_windows_msvc = { value = "--target=x86_64-pc-windows-msvc -Wno-unused-command-line-argument -fuse-ld=lld-link /imsvc /home/user/.cache/cargo-xwin/xwin/crt/include /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/ucrt /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/um /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/shared /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/winrt /MD", force = true }
+CXXFLAGS_x86_64_pc_windows_msvc = { value = "--target=x86_64-pc-windows-msvc -Wno-unused-command-line-argument -fuse-ld=lld-link /imsvc /home/user/.cache/cargo-xwin/xwin/crt/include /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/ucrt /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/um /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/shared /imsvc /home/user/.cache/cargo-xwin/xwin/sdk/include/winrt /EHsc /MD", force = true }
+
+# `ort` (ONNX Runtime) lie DirectML.lib en dur sous Windows (les binaires prébuilts sont
+# toujours compilés avec le support DirectML), mais ce .lib d'import n'est pas fourni par
+# le SDK minimal que télécharge `xwin` — seul DirectML.dll (déjà en cache) l'est. On a
+# régénéré le .lib d'import nous-mêmes (voir windows-libs/DirectML.def) à partir des 2
+# symboles exportés par la .dll.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-L", "windows-libs"]

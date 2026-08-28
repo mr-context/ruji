@@ -1,0 +1,7 @@
+{
+  "uuid": "ruji-pointer@ruji.local",
+  "name": "Ruji Pointer Service",
+  "description": "Expose la position globale du curseur via D-Bus (org.ruji.Pointer), pour que Ruji sache où positionner sa capsule même au-dessus d'une fenêtre Wayland native (navigateur, GNOME Text Editor...), là où X11/XQueryPointer ne voit rien.",
+  "shell-version": ["45", "46", "47", "48"],
+  "version": 1
+}

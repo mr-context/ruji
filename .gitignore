@@ -1,0 +1,8 @@
+/target
+
+# fichier système parasite (root, illisible), sans rapport avec le projet
+/test.save
+
+# fichiers d'IDE/OS courants
+.DS_Store
+*.swp

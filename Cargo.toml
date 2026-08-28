@@ -1,0 +1,30 @@
+[package]
+name = "ruji"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = "0.36.1"
+arboard = "3.6.1"
+mouse_position = "0.1.4"
+egui_extras = { version = "0.36.1", features = ["image"] }
+ort = "2.0.0-rc.13"
+tokenizers = "0.23.1"
+serde_json = "1.0.151"
+dirs = "6.0.0"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+x11rb = "0.13"
+evdev = "0.13.2"
+signal-hook = "0.3"
+zbus = { version = "5.19.0", default-features = false, features = ["blocking-api"] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+    "Win32_UI_HiDpi",
+] }
